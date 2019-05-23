@@ -25,5 +25,7 @@ try:
 finally:
     GPIO.output(6, GPIO.LOW)
     GPIO.output(13, GPIO.LOW)
+    sleep(1)
+    GPIO.cleanup
 
 
