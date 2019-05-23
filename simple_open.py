@@ -17,11 +17,11 @@ GPIO.output(27, GPIO.LOW)
 
 try:
     print("Started! {}".format(time_stamp()))
-    print("Opening 6 and 13")
+    print("Opening 17 and 22")
 
     GPIO.output(17, GPIO.HIGH)
     GPIO.output(22, GPIO.HIGH)
-    sleep(1000)
+    sleep(10*60)
 finally:
     GPIO.output(17, GPIO.LOW)
     GPIO.output(22, GPIO.LOW)
