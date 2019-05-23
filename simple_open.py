@@ -8,23 +8,23 @@ def time_stamp():
 
 GPIO.setmode(GPIO.BCM)
 
-GPIO.setup(6, GPIO.OUT)
-GPIO.setup(13, GPIO.OUT)
-GPIO.setup(19, GPIO.OUT)
-GPIO.output(6, GPIO.LOW)
-GPIO.output(13, GPIO.LOW)
-GPIO.output(19, GPIO.LOW)
+GPIO.setup(17, GPIO.OUT)
+GPIO.setup(22, GPIO.OUT)
+GPIO.setup(27, GPIO.OUT)
+GPIO.output(17, GPIO.LOW)
+GPIO.output(22, GPIO.LOW)
+GPIO.output(27, GPIO.LOW)
 
 try:
     print("Started! {}".format(time_stamp()))
     print("Opening 6 and 13")
 
-    GPIO.output(6, GPIO.HIGH)
-    GPIO.output(13, GPIO.HIGH)
+    GPIO.output(17, GPIO.HIGH)
+    GPIO.output(22, GPIO.HIGH)
     sleep(1000)
 finally:
-    GPIO.output(6, GPIO.LOW)
-    GPIO.output(13, GPIO.LOW)
+    GPIO.output(17, GPIO.LOW)
+    GPIO.output(22, GPIO.LOW)
     sleep(1)
     GPIO.cleanup
 
