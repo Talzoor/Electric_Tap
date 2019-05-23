@@ -23,6 +23,7 @@ try:
     GPIO.output(22, GPIO.HIGH)
     sleep(10*60)
 finally:
+    print("Closing")
     GPIO.output(17, GPIO.LOW)
     GPIO.output(22, GPIO.LOW)
     sleep(1)
