@@ -1,6 +1,7 @@
 
 import RPi.GPIO as GPIO
 from time import sleep
+from datetime import datetime
 
 GPIO.setmode(GPIO.BCM)
 
@@ -12,6 +13,9 @@ GPIO.output(13, GPIO.LOW)
 GPIO.output(19, GPIO.LOW)
 
 try:
+    print("Started! {}".format(datetime.timestamp()))
+    print("Opening 6 and 13")
+
     GPIO.output(6, GPIO.HIGH)
     GPIO.output(13, GPIO.HIGH)
     sleep(1000)
