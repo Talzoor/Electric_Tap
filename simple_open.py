@@ -21,7 +21,7 @@ try:
 
     GPIO.output(17, GPIO.HIGH)
     GPIO.output(22, GPIO.HIGH)
-    sleep(10*60)
+    sleep(1*60)
 finally:
     GPIO.output(17, GPIO.LOW)
     GPIO.output(22, GPIO.LOW)
