@@ -3,8 +3,10 @@ import RPi.GPIO as GPIO
 from time import sleep
 from datetime import datetime
 
+
 def time_stamp():
     return datetime.today().strftime('%Y-%m-%d %H:%M.%S --> ')
+
 
 GPIO.setmode(GPIO.BCM)
 
@@ -21,7 +23,7 @@ try:
 
     GPIO.output(17, GPIO.HIGH)
     GPIO.output(22, GPIO.HIGH)
-    sleep(10*60)
+    sleep(4*60)                 # 4min
 finally:
     print("Closing")
     GPIO.output(17, GPIO.LOW)
