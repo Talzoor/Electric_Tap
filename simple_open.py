@@ -27,7 +27,7 @@ try:
 
     GPIO.output(PIN_A, GPIO.HIGH)
     GPIO.output(PIN_B, GPIO.HIGH)
-    sleep(1*60)                 # 4min
+    sleep(6*60)                 # 6min
 finally:
     print("Closing")
     GPIO.output(PIN_A, GPIO.LOW)
