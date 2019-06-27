@@ -29,7 +29,7 @@ try:
     GPIO.output(PIN_B, GPIO.HIGH)
     sleep(6*60)                 # 6min
 finally:
-    print("Closing {}".format(time_stamp()))
+    print("Closing {}\n".format(time_stamp()))
     GPIO.output(PIN_A, GPIO.LOW)
     GPIO.output(PIN_B, GPIO.LOW)
     sleep(1)
