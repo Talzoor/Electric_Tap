@@ -29,13 +29,14 @@ try:
     GPIO.output(PIN_B, GPIO.HIGH)
     sleep(6*60)                 # 6min
 finally:
-    print("Closing")
+    print("Closing {}".format(time_stamp()))
     GPIO.output(PIN_A, GPIO.LOW)
     GPIO.output(PIN_B, GPIO.LOW)
     sleep(1)
     GPIO.setup(PIN_A, GPIO.IN)
     GPIO.setup(PIN_B, GPIO.IN)
 
-    GPIO.cleanup
+    GPIO.cleanup()
+
 
 
