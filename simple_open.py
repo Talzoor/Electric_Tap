@@ -24,14 +24,14 @@ GPIO.output(PIN_B, GPIO.LOW)
 GPIO.output(PIN_C, GPIO.LOW)
 
 try:
-    print("Started! {}".format(time_stamp()))
+    print("{}Started!".format(time_stamp()))
     print("Opening 17 and 22")
 
     GPIO.output(PIN_A, GPIO.HIGH)
     GPIO.output(PIN_B, GPIO.HIGH)
     sleep(6*60)                 # 6min
 finally:
-    print("Closing {}\n".format(time_stamp()))
+    print("{}Closing\n".format(time_stamp()))
     GPIO.output(PIN_A, GPIO.LOW)
     GPIO.output(PIN_B, GPIO.LOW)
     sleep(1)
