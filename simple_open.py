@@ -27,7 +27,8 @@ class ConfigSectionMap:
         file_name = 'Settings.ino'
 
         data_folder = Path(script_dir)
-        file_to_open = data_folder / file_name
+        file_to_open = "{}/{}".format(data_folder, file_name)
+        print("file_to_open:{}".format(file_to_open))
 
         try:
             with open(file_to_open) as f:
