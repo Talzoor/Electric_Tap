@@ -27,11 +27,11 @@ class ConfigSectionMap:
         file_name = 'Settings.ino'
 
         data_folder = Path(script_dir)
-        file_to_open = "{}/{}".format(data_folder, file_name)
-        print("file_to_open:{}".format(file_to_open))
+        setting_file = "{}/{}".format(data_folder, file_name)
+        # print("Setting file:{}".format(setting_file))
 
         try:
-            with open(file_to_open) as f:
+            with open(setting_file) as f:
                 Config.read_file(f)
 
                 if Config.has_section(section):
