@@ -95,7 +95,7 @@ def main():
         ConfigVals = ConfigSectionMap()
         time_to_run_dict = ConfigVals.get("Timing")
         if time_to_run_dict == {}:
-            time_to_run = 6         # default of 6 min
+            time_to_run = DEFAULT_TIME         # default of 6 min
         else:
             time_to_run = time_to_run_dict["run time"]
             time_to_run = take_digits_only(time_to_run)
