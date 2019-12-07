@@ -100,7 +100,7 @@ def main():
             time_to_run = time_to_run_dict["run time"]
             time_to_run = take_digits_only(time_to_run)
 
-        if type(time_to_run) is int and time_to_run > 0:
+        if (type(time_to_run) is int or type(time_to_run) is float) and time_to_run > 0:
             pass
         else:
             time_to_run = DEFAULT_TIME
