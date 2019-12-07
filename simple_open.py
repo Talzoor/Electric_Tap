@@ -62,7 +62,7 @@ def take_digits_only(_str):
     end = len(_str)
     int_to_return = ""
     for i, chr in enumerate(_str):
-        if chr.isdigit():
+        if chr.isdigit() or chr == '.':
             if start == -1: start = i
         else:
             if start == -1:
