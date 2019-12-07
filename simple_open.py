@@ -71,7 +71,7 @@ def take_digits_only(_str):
                 end = i
                 break
     if not start == -1:
-        int_to_return = int(_str[start:end])
+        int_to_return = float(_str[start:end])
     return int_to_return
 
 
