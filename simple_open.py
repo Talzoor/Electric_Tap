@@ -108,16 +108,16 @@ def main():
 
         print("Opening 17 and 22 for {} min".format(time_to_run))
 
+        GPIO.output(PIN_A, GPIO.HIGH)
         GPIO.output(PIN_C, GPIO.HIGH)
-        GPIO.output(PIN_B, GPIO.HIGH)
         sleep(time_to_run * 60)                 # Xmin
     finally:
         print("{}Closing\n".format(time_stamp()))
+        GPIO.output(PIN_A, GPIO.LOW)
         GPIO.output(PIN_C, GPIO.LOW)
-        GPIO.output(PIN_B, GPIO.LOW)
         sleep(1)
         GPIO.setup(PIN_A, GPIO.IN)
-        GPIO.setup(PIN_B, GPIO.IN)
+        GPIO.setup(PIN_C, GPIO.IN)
 
         GPIO.cleanup()
 
