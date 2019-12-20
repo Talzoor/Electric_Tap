@@ -9,7 +9,7 @@ import os
 from pathlib import Path
 
 PIN_A = 17
-PIN_B = 22
+PIN_B_COM = 22
 PIN_C = 27
 PIN_LED = 18
 
@@ -80,10 +80,10 @@ def main():
     GPIO.setmode(GPIO.BCM)
 
     GPIO.setup(PIN_A, GPIO.OUT)
-    GPIO.setup(PIN_B, GPIO.OUT)
+    GPIO.setup(PIN_B_COM, GPIO.OUT)
     GPIO.setup(PIN_C, GPIO.OUT)
     GPIO.output(PIN_A, GPIO.LOW)
-    GPIO.output(PIN_B, GPIO.LOW)
+    GPIO.output(PIN_B_COM, GPIO.LOW)
     GPIO.output(PIN_C, GPIO.LOW)
 
     GPIO.setup(PIN_LED, GPIO.OUT)
@@ -108,16 +108,16 @@ def main():
 
         print("Opening 17 and 22 for {} min".format(time_to_run))
 
-        GPIO.output(PIN_B, GPIO.HIGH)
-        GPIO.output(PIN_C, GPIO.HIGH)
+        GPIO.output(PIN_B_COM, GPIO.HIGH)
+        GPIO.output(PIN_A, GPIO.HIGH)
         sleep(time_to_run * 60)                 # Xmin
     finally:
         print("{}Closing\n".format(time_stamp()))
-        GPIO.output(PIN_B, GPIO.LOW)
-        GPIO.output(PIN_C, GPIO.LOW)
+        GPIO.output(PIN_B_COM, GPIO.LOW)
+        GPIO.output(PIN_A, GPIO.LOW)
         sleep(1)
-        GPIO.setup(PIN_B, GPIO.IN)
-        GPIO.setup(PIN_C, GPIO.IN)
+        GPIO.setup(PIN_B_COM, GPIO.IN)
+        GPIO.setup(PIN_A, GPIO.IN)
 
         GPIO.cleanup()
 

@@ -1,3 +1,3 @@
 [Timing]
-run time = 6        # min
+run time = 0.5        # min
 
