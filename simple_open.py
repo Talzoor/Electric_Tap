@@ -109,7 +109,7 @@ def main():
         print("Opening 17 and 22 for {} min".format(time_to_run))
 
         GPIO.output(PIN_A, GPIO.HIGH)
-        GPIO.output(PIN_B, GPIO.HIGH)
+        GPIO.output(PIN_C, GPIO.HIGH)
         sleep(time_to_run * 60)                 # Xmin
     finally:
         print("{}Closing\n".format(time_stamp()))
