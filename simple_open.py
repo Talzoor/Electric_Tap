@@ -145,7 +145,9 @@ def check_time_to_run_pot(_time_to_run_pot):
 
 
 def open_valve(_pinA, _pinB, _open_time):
-    print("Opening {} and {} for {} min".format(_pinA, _pinB, _open_time))
+    print("Opening {} and {} for {} {}".format(_pinA, _pinB,
+                                               _open_time if _open_time >= 1 else  _open_time*60 ,
+                                               "min" if _open_time >= 1 else "sec"))
     GPIO.output(_pinA, GPIO.HIGH)
     GPIO.output(_pinB, GPIO.HIGH)
     sleep(_open_time * 60)
