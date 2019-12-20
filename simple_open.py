@@ -114,7 +114,7 @@ def main():
     finally:
         print("{}Closing\n".format(time_stamp()))
         GPIO.output(PIN_A, GPIO.LOW)
-        GPIO.output(PIN_B, GPIO.LOW)
+        GPIO.output(PIN_C, GPIO.LOW)
         sleep(1)
         GPIO.setup(PIN_A, GPIO.IN)
         GPIO.setup(PIN_B, GPIO.IN)
