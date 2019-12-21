@@ -31,18 +31,18 @@ def main():
 
     GPIO_def()
     try:
-        print("{}Started (pot only)!".format(time_stamp()))
+        print("{}Started (bed only)!".format(time_stamp()))
 
         time_to_run_pot = 15            #15 min
 
-        open_valve(PIN_B_COM, PIN_A, time_to_run_pot)
+        open_valve(PIN_B_COM, PIN_C, time_to_run_pot)
 
     finally:
         print("{}Closing\n".format(time_stamp()))
-        GPIO.output(PIN_A, GPIO.LOW)
+        GPIO.output(PIN_C, GPIO.LOW)
         GPIO.output(PIN_B_COM, GPIO.LOW)
         sleep(1)
-        GPIO.setup(PIN_A, GPIO.IN)
+        GPIO.setup(PIN_C, GPIO.IN)
         GPIO.setup(PIN_B_COM, GPIO.IN)
 
         GPIO.cleanup()
