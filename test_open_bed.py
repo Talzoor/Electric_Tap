@@ -33,7 +33,7 @@ def main():
     try:
         print("{}Started (bed only)!".format(time_stamp()))
 
-        time_to_run_pot = 15            #15 min
+        time_to_run_pot = 15            #15  min
 
         open_valve(PIN_B_COM, PIN_C, time_to_run_pot)
 
