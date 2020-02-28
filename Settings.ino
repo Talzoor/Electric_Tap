@@ -1,6 +1,6 @@
 [Timing]
-run time (flowerbed) = 10        # min
-run time (flowerpot) = 1        # min
+run time (flowerbed) = 5        # min
+run time (flowerpot) = 3        # min
 
 
 
