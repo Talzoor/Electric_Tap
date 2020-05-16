@@ -1,12 +1,17 @@
 #!/usr/bin/python3
 
+try:
+    import RPi.GPIO as GPIO
+except ImportError:
+    import fakeRPiGPIO as GPIO
 
-import RPi.GPIO as GPIO
 from time import sleep
 from datetime import datetime
 import configparser
 import os
 from pathlib import Path
+import argparse
+
 
 PIN_A = 17      # flowerpot
 PIN_B_COM = 22  # common
@@ -16,12 +21,21 @@ PIN_LED = 18
 DEFAULT_TIME_BED = 6
 DEFAULT_TIME_POT = 4
 
-Config = configparser.ConfigParser()
+
+def argument_program():
+    arg_parser = argparse.ArgumentParser(description='-p [N] will choose program nmber')
+    arg_parser.add_argument('-p', action="store", dest="p", type=int)
+
+    results = arg_parser.parse_args()
+    if results.p is None:   # if no arg is passed so p=1
+        results.p = 1
+    return results.p
 
 
 class ConfigSectionMap:
     def __init__(self, _exception=None):
         self.exception = _exception
+        self.config = configparser.ConfigParser()
 
     def get(self, section):
         dict1 = {}
@@ -35,13 +49,13 @@ class ConfigSectionMap:
 
         try:
             with open(setting_file) as f:
-                Config.read_file(f)
+                self.config.read_file(f)
 
-                if Config.has_section(section):
-                    options = Config.options(section)
+                if self.config.has_section(section):
+                    options = self.config.options(section)
                     for option in options:
                         try:
-                            dict1[option] = Config.get(section, option)
+                            dict1[option] = self.config.get(section, option)
                             if dict1[option] == -1:
                                 pass
                         except:
@@ -95,14 +109,13 @@ def main():
 
     GPIO_def()
     try:
-        print("{}Started!".format(time_stamp()))
-
+        program = argument_program()
+        print("{}Started! - program {}".format(time_stamp(), program))
         ConfigVals = ConfigSectionMap()
-        time_to_run_dict = ConfigVals.get("Timing")
+        time_to_run_dict = ConfigVals.get("Program {}".format(program))
         if time_to_run_dict == {}:
             time_to_run_bed = DEFAULT_TIME_BED         # default of 6 min
             time_to_run_pot = DEFAULT_TIME_POT         # default of 4 min
-
         else:
             time_to_run_bed = time_to_run_dict["run time (flowerbed)"]
             time_to_run_bed = take_digits_only(time_to_run_bed)
