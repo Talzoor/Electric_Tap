@@ -12,27 +12,6 @@ import os
 from pathlib import Path
 import argparse
 
-
-from pynput.keyboard import Key, Listener
-
-def on_press(key):
-    print('{0} pressed'.format(
-        key))
-
-def on_release(key):
-    print('{0} release'.format(
-        key))
-    if key == Key.esc:
-        # Stop listener
-        return False
-
-def check_keyboard():
-    # Collect events until released
-    with Listener(
-            on_press=on_press,
-            on_release=on_release) as listener:
-        listener.join()
-
 PIN_A = 17      # flowerpot
 PIN_B_COM = 22  # common
 PIN_C = 27      # flowerbed
@@ -41,9 +20,8 @@ PIN_LED = 18
 DEFAULT_TIME_BED = 6
 DEFAULT_TIME_POT = 4
 
-
 def argument_program():
-    arg_parser = argparse.ArgumentParser(description='-p [N] will choose program nmber')
+    arg_parser = argparse.ArgumentParser(description='-p [N] will choose program number')
     arg_parser.add_argument('-p', action="store", dest="p", type=int)
 
     results = arg_parser.parse_args()
