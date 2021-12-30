@@ -1,0 +1,55 @@
+#!/bin/bash
+
+# Define a timestamp function
+timestamp() {
+date +"%Y/%m/%d %T"
+}
+curr_ip() {
+#ifconfig wlan0 | grep 'inet' | cut -d: -f2 | awk '{print $2}'
+hostname -I | awk '{print $1}'
+}
+static_ip() {
+cat /etc/dhcpcd.conf | grep "interface wlan0" -A4 | grep "static ip_address" | sed -e 's/^.*\(=.*\/\).*$/\1/' -e 's/[static ip_address=/]//g'
+}
+is_num() {
+re='^[0-9]+$'
+if ! [[ $1 =~ $re ]] ; then
+   echo "error: Not a number" >&2
+fi
+}
+
+printf "Started \t-- $(timestamp) -- IP:$(curr_ip)"
+
+IP=www.google.com
+PACKETS=4
+LOGFILE=/home/pi/wifi_check.log
+
+count=$(ping -c $PACKETS -W 2 -n -B -s 0 -i 1 -l 1 -q $IP | grep 'received' | awk -F',' '{ print $2 }' | awk '{ print $1 }')
+
+printf " - count:(#$count#"
+if [ $count == '' ]; then
+	count=0
+fi
+printf ",#$count#)"
+if [ $count == 0 ]; then
+  printf " -> failed. reconnect"
+	wpa_cli -i wlan0 disconnect
+	wpa_cli -i wlan0 list_networks
+	sleep 5
+	wpa_cli -i wlan0 reconnect
+	sleep 5
+else 
+  printf " -> passed.($count)"
+fi
+printf "\n"
+
+printf "\t\tIP check: now=$(curr_ip), static=$(static_ip)"
+
+if [ $(curr_ip)==$(static_ip)  ]; then
+	printf " -> OK"
+else
+	printf " -> Not good - changing"
+fi
+
+printf "\n"
+
