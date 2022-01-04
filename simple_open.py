@@ -167,7 +167,12 @@ def open_valve(_pinA, _pinB, _open_time):
 
 
 if __name__ == '__main__':
-    main()
+    try:
+        main()
+    except KeyboardInterrupt:
+        print("{}Quit! (KeyboardInterrupt) - Bye.\n".format(time_stamp()))
+        exit(1)
+
 
 
 
