@@ -103,6 +103,18 @@ def take_digits_only(_str):
     return int_to_return
 
 
+def check_enabled(_dict):
+    if _dict is {}:
+        state_enable = True
+    else:
+        state_enable = _dict["enabled"]
+        if state_enable.lower() in ['true', 'yes', 'y', '1']:
+            state_enable = True
+        else:
+            state_enable = False
+    return state_enable
+
+
 def main():
 
     GPIO_def()
@@ -110,21 +122,25 @@ def main():
         program = argument_program()
         print("{}Started! - program {}".format(time_stamp(), program))
         ConfigVals = ConfigSectionMap()
-        time_to_run_dict = ConfigVals.get("Program {}".format(program))
-        if time_to_run_dict == {}:
-            time_to_run_bed = DEFAULT_TIME_BED         # default of 6 min
-            time_to_run_pot = DEFAULT_TIME_POT         # default of 4 min
+        state_dict = ConfigVals.get("State")
+        if check_enabled(state_dict):
+            time_to_run_dict = ConfigVals.get("Program {}".format(program))
+            if time_to_run_dict == {}:
+                time_to_run_bed = DEFAULT_TIME_BED         # default of 6 min
+                time_to_run_pot = DEFAULT_TIME_POT         # default of 4 min
+            else:
+                time_to_run_bed = time_to_run_dict["run time (flowerbed)"]
+                time_to_run_bed = take_digits_only(time_to_run_bed)
+                time_to_run_pot = time_to_run_dict["run time (flowerpot)"]
+                time_to_run_pot = take_digits_only(time_to_run_pot)
+
+            time_to_run_bed = check_time_to_run_bed(time_to_run_bed)
+            time_to_run_pot = check_time_to_run_pot(time_to_run_pot)
+
+            open_valve(PIN_B_COM, PIN_C, time_to_run_bed)
+            open_valve(PIN_B_COM, PIN_A, time_to_run_pot)
         else:
-            time_to_run_bed = time_to_run_dict["run time (flowerbed)"]
-            time_to_run_bed = take_digits_only(time_to_run_bed)
-            time_to_run_pot = time_to_run_dict["run time (flowerpot)"]
-            time_to_run_pot = take_digits_only(time_to_run_pot)
-
-        time_to_run_bed = check_time_to_run_bed(time_to_run_bed)
-        time_to_run_pot = check_time_to_run_pot(time_to_run_pot)
-
-        open_valve(PIN_B_COM, PIN_C, time_to_run_bed)
-        open_valve(PIN_B_COM, PIN_A, time_to_run_pot)
+            print("{}not Enabled - Check 'Settings.ino'\n".format(time_stamp()))
 
     finally:
         print("{}Closing\n".format(time_stamp()))

@@ -1,3 +1,6 @@
+[State]
+enabled = False
+
 [Program 1]
 run time (flowerbed) = 11       # min   11
 run time (flowerpot) = 3       # min    3
